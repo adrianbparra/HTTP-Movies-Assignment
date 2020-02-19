@@ -65,7 +65,18 @@ body {
   background-color: green;
   color: white;
 }
-
+.update-button {
+  position: absolute;
+  top: 65px;
+  right: 25px;
+  border: 1px solid gray;
+  padding: 5px 10px;
+  background-color: lightgoldenrodyellow;
+  cursor: pointer;
+}
+.update-button:hover {
+  background-color: yellowgreen;
+}
 .home-button {
   padding: 5px 10px;
   background-color: lightskyblue;
