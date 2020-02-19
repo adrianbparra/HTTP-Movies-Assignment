@@ -77,6 +77,19 @@ body {
 .update-button:hover {
   background-color: yellowgreen;
 }
+.delete-button {
+  position: absolute;
+  top: 105px;
+  right: 25px;
+  border: 1px solid gray;
+  padding: 5px 10px;
+  background-color: orangered;
+  cursor: pointer;
+}
+.delete-button:hover {
+  background-color: red;
+  color: white;
+}
 .home-button {
   padding: 5px 10px;
   background-color: lightskyblue;
