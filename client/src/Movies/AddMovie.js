@@ -7,43 +7,13 @@ export default class MovieUpdate extends React.Component {
         super(props)
         this.state={
             movie: {
-                title: '',
+                title: undefined,
                 director: '',
                 metascore: 0,
                 stars: [],
             }
         }
     }
-
-    componentDidMount(){
-        console.log(this.props)
-        this.fetchMovie(this.props.match.params.id)
-        console.log(this.state)
-    }
-
-    fetchMovie = id => {
-        axios
-          .get(`http://localhost:5000/api/movies/${id}`)
-          .then(res => this.setState({ movie: res.data }))
-          .catch(err => console.log(err.response));
-      };
-
-    updateSubmit = (e) => {
-        e.preventDefault();
-        console.log(this.state.movie)
-
-        axios
-            .put(`http://localhost:5000/api/movies/${this.state.movie.id}`, this.state.movie)
-            .then(res => {
-                console.log(res)
-                this.props.history.push("/")
-                
-            })
-            .catch(err => console.log(err))
-
-    }
-
-
 
     handleChange = e => {
         if(e.target.name === "stars"){
@@ -64,12 +34,25 @@ export default class MovieUpdate extends React.Component {
         })
     }
 
+    addSubmit = e => {
+        e.preventDefault();
+
+        axios
+            .post(`http://localhost:5000/api/movies`,this.state.movie)
+            .then(res=> {
+                console.log(res)
+                console.log(this.props)
+                this.props.history.push("/")
+            })
+            .catch(err => console.log(err))
+        
+    }
 
     render() {
 
         
         return(
-            <form onSubmit={this.updateSubmit}>
+            <form onSubmit={this.addSubmit}>
                 <label htmlFor="title">Title</label>
                 <input
                     type="text"
@@ -99,8 +82,7 @@ export default class MovieUpdate extends React.Component {
                     value={this.state.movie.stars}
                     onChange={this.handleChange}
                 />
-                <span>Seperate stars using a comma.</span>
-                <button>Update Movie</button>
+                <button>Add Movie</button>
             </form>
         )
     }
