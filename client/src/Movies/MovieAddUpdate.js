@@ -7,9 +7,9 @@ export default class MovieAddUpdate extends React.Component {
         super(props)
         this.state={
             movie: {
-                title: undefined,
+                title: '',
                 director: '',
-                metascore: undefined,
+                metascore: null,
                 stars: [],
             }
         }
@@ -24,13 +24,19 @@ export default class MovieAddUpdate extends React.Component {
 
             this.fetchMovie(this.props.match.params.id)
 
+            
+
         }
+        console.log(this.state.movie)
     }
 
     fetchMovie = id => {
         axios
           .get(`http://localhost:5000/api/movies/${id}`)
-          .then(res => this.setState({ movie: res.data }))
+          .then(res => {
+              this.setState({ movie: res.data })
+                console.log(res.data)
+            })
           .catch(err => console.log(err.response));
       };
 
