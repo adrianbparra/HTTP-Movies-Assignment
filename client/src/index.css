@@ -103,3 +103,20 @@ body {
   color: red;
   text-align: center;
 }
+
+.form {
+  padding: 1rem;
+  width: 75%;
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+
+  
+}
+
+.form button {
+  margin: 1rem auto;
+  width: 160px;
+  text-align: center;
+}
+

@@ -2,23 +2,29 @@ import React from "react";
 import axios from "axios";
 
 
-export default class MovieUpdate extends React.Component {
+export default class MovieAddUpdate extends React.Component {
     constructor(props){
         super(props)
         this.state={
             movie: {
-                title: '',
+                title: undefined,
                 director: '',
-                metascore: 0,
+                metascore: undefined,
                 stars: [],
             }
         }
     }
 
+    
+
     componentDidMount(){
-        console.log(this.props)
-        this.fetchMovie(this.props.match.params.id)
-        console.log(this.state)
+        console.log(this.props.history.location.pathname) 
+        
+        if(this.props.history.location.pathname === "/movies/update-movie/1"){
+
+            this.fetchMovie(this.props.match.params.id)
+
+        }
     }
 
     fetchMovie = id => {
@@ -32,7 +38,9 @@ export default class MovieUpdate extends React.Component {
         e.preventDefault();
         console.log(this.state.movie)
 
-        axios
+        if(this.props.history.location.pathname === "/movies/update-movie/1"){
+
+            axios
             .put(`http://localhost:5000/api/movies/${this.state.movie.id}`, this.state.movie)
             .then(res => {
                 console.log(res)
@@ -41,11 +49,25 @@ export default class MovieUpdate extends React.Component {
             })
             .catch(err => console.log(err))
 
+        } else {
+            axios
+            .post(`http://localhost:5000/api/movies`,this.state.movie)
+            .then(res=> {
+                console.log(res)
+                console.log(this.props)
+                this.props.history.push("/")
+            })
+            .catch(err => console.log(err))
+        }
+
+        
+
     }
 
 
 
     handleChange = e => {
+        console.log(e.target.value)
         if(e.target.name === "stars"){
             const starsArray = e.target.value.split(",")
             this.setState({
@@ -64,12 +86,23 @@ export default class MovieUpdate extends React.Component {
         })
     }
 
+    submitButton = () => {
+        if(this.props.history.location.pathname === "/movies/update-movie/1") {
+            return <button>Update Movie</button>
+        } else {
+            return <button>Add Movie</button>
+        }
+    }
+
 
     render() {
 
+        console.log(this.props.location)
+
         
         return(
-            <form onSubmit={this.updateSubmit}>
+            <form onSubmit={this.updateSubmit} className="form update_form">
+
                 <label htmlFor="title">Title</label>
                 <input
                     type="text"
@@ -84,13 +117,15 @@ export default class MovieUpdate extends React.Component {
                     value={this.state.movie.director}
                     onChange={this.handleChange}
                 />
+
                 <label htmlFor="metascore">Metascore</label>
                 <input
-                    type="number"
-                    name="metascore"
-                    value={this.state.movie.metascore}
-                    onChange={this.handleChange}
+                type="number"
+                name="metascore"
+                value={this.state.movie.metascore}
+                onChange={this.handleChange}
                 />
+                
                 <label htmlFor="stars">Stars</label>
                 <textarea
                     rows="10"
@@ -100,7 +135,7 @@ export default class MovieUpdate extends React.Component {
                     onChange={this.handleChange}
                 />
                 <span>Seperate stars using a comma.</span>
-                <button>Update Movie</button>
+                {this.submitButton()}
             </form>
         )
     }

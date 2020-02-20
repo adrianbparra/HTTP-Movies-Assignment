@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import axios from 'axios';
 export default class SavedList extends Component {
   constructor(props) {
     super(props);
+    this.state={
+      savedMovies: [],
+    }
   }
+
 
   render() {
     return (
@@ -22,7 +27,7 @@ export default class SavedList extends Component {
         })}
         <div className="home-button">
           <Link to="/">Home</Link>
-          
+
           <Link to="/add-movie">Add Movie</Link>
         </div>
       </div>
