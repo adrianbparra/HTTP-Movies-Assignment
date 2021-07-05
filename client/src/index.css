@@ -65,8 +65,36 @@ body {
   background-color: green;
   color: white;
 }
-
+.update-button {
+  position: absolute;
+  top: 65px;
+  right: 25px;
+  border: 1px solid gray;
+  padding: 5px 10px;
+  background-color: lightgoldenrodyellow;
+  cursor: pointer;
+}
+.update-button:hover {
+  background-color: yellowgreen;
+}
+.delete-button {
+  position: absolute;
+  top: 105px;
+  right: 25px;
+  border: 1px solid gray;
+  padding: 5px 10px;
+  background-color: orangered;
+  cursor: pointer;
+}
+.delete-button:hover {
+  background-color: red;
+  color: white;
+}
 .home-button {
+  padding: 5px 10px;
+}
+.home-button a {
+  margin: 0 2px;
   padding: 5px 10px;
   background-color: lightskyblue;
 }
@@ -75,3 +103,20 @@ body {
   color: red;
   text-align: center;
 }
+
+.form {
+  padding: 1rem;
+  width: 75%;
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+
+  
+}
+
+.form button {
+  margin: 1rem auto;
+  width: 160px;
+  text-align: center;
+}
+
